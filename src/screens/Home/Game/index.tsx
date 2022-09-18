@@ -14,10 +14,12 @@ import { THEME } from '../../../theme';
 import { DuoCard, DuoCardProps } from '../../../components/DuoCard';
 import { Background } from '../../../components/Background';
 import { Heading } from '../../../components/Heading';
+import { DuoMatch } from '../../../components/DuoMatch/index'
 
 export function Game() {
 
   const [duos, setDuos] = useState<DuoCardProps[]>([])
+  const [discordDuo, setDiscordDuo] = useState('Gusta#123')
 
   const navigation = useNavigation()
   const route = useRoute();
@@ -28,7 +30,7 @@ export function Game() {
   }
 
   useEffect(() => {
-    fetch(`http://192.168.0.3:3333/games/${game.id}/ads`)
+    fetch(`http://192.168.0.4:3333/games/${game.id}/ads`)
     .then(response => response.json())
     .then(data => setDuos(data))
   }, []);
@@ -86,6 +88,11 @@ export function Game() {
         />
         
 
+        <DuoMatch 
+          visible={discordDuo.length > 0}
+          discord='Gustavo#1234'
+          onClose={() => setDiscordDuo('')}
+        />
       </SafeAreaView>
 
     </Background>
